@@ -13,7 +13,6 @@ vector<string> parseQuery(string str)
    string word = ""; 
    for (auto x : str + " ") 
    {
-     
        if (x == ' ') 
        { 
         //    cout << word << endl; 
