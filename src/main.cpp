@@ -18,7 +18,7 @@ int main()
 	while (command.compare("exit") != 0)
 	{
 		cout << "DBMS>> ";
-
+		
 		// put the raw query string on command
 		getline(cin, command);
 
