@@ -1,55 +1,66 @@
+#include <string>
+#include <vector>
+
 #include <iostream>
-// #include<boost/filesystem.hpp>
+#include "headers.h"
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+using std::vector;
 
-#include "../include/hello.h"
-#include <algorithm>
-#include <fstream>
-
-using namespace std;
-
-int main(int argc, char *argv[]) {
-	// sayHello();
-	vector<string> v;
-	cout << "Hello Easy C++ project!" << endl;
-	
-	
-}
-
-class Database
+int main()
 {
-private:
-	/* data */
-public:
-	Database(/* args */);
-	~Database();
-	void showTables();
-	void createTable();
-};
+	// the command(query) from keyboard
+	string command;
 
-Database::Database(/* args */)
-{
-}
+	// process queries until "exit" command input form keyboard
+	while (command.compare("exit") != 0)
+	{
+		cout << "DBMS>> ";
 
-Database::~Database()
-{
-}
+		// put the raw query string on command
+		getline(cin, command);
 
-class Table
-{
-private:
-	/* data */
-public:
-	Table(/* args */);
-	~Table();
-	void insert();
-	void update();
-	void deleteArow();
-};
-
-Table::Table(/* args */)
-{
-}
-
-Table::~Table()
-{
+		// get the query string parsed
+		vector<string> parsedQuery = parseQuery(command);
+		/*
+			once parsed, know the main query and process based on it
+		 */
+		string mainQuery = parsedQuery[0];
+		
+		// process create commands
+		if (mainQuery == "create")
+		{
+			cout << "create executed"<< endl;
+		}
+		// process use comands
+		else if (mainQuery == "use")
+		{
+		}
+		// process show commands
+		else if (mainQuery == "show")
+		{
+		}
+		// process insert
+		else if (mainQuery == "insert")
+		{
+		}
+		// process select
+		else if (mainQuery == "select")
+		{
+		}
+		// process update
+		else if (mainQuery == "update")
+		{
+		}
+		// all other main queries
+		else
+		{
+			if (mainQuery != "exit")
+				cout << "ERROR: Invalid query!" << endl;
+		}
+	}
+	// user exited
+	cout << "Good bye!" << endl;
 }
