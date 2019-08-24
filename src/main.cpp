@@ -11,6 +11,13 @@ using std::vector;
 
 int main()
 {
+	/*
+		hold the current path to a db or table
+	 */
+
+	vector<string> currentPath;
+	currentPath.push_back(DB_DirPath);
+
 	// the command(query) from keyboard
 	string command;
 
@@ -32,15 +39,47 @@ int main()
 		// process create commands
 		if (mainQuery == "create")
 		{
-			cout << "create executed"<< endl;
+			if (parsedQuery[1] == "database")
+			{
+				// pass the name of the db from parsed query
+				createDatabase(parsedQuery[2]);
+			}
+			else if(parsedQuery[1] == "table"){
+				// pass the path of the db, name of the table and columns from the parsed query
+				createTable(currentPath, parsedQuery[2], parsedQuery);
+			}
+			else {
+				showErrorMessage();
+			}
+			
 		}
 		// process use comands
 		else if (mainQuery == "use")
 		{
+			// add the database name to paths vector
+			
+			if(currentPath.size() == 1){
+				currentPath.push_back(parsedQuery[1]);
+			}
+			else {
+				 /*
+					if already the current database is selected, pop it and add..
+					the recent one
+				  */
+				currentPath.pop_back();
+				currentPath.push_back(parsedQuery[1]);
+			}
 		}
 		// process show commands
 		else if (mainQuery == "show")
 		{
+			if(parsedQuery[1] == "databases" || parsedQuery[1] == "tables"){
+				showDbsOrTables(parsedQuery[1], currentPath);
+			}
+			else {
+				showErrorMessage();
+			}
+			
 		}
 		// process insert
 		else if (mainQuery == "insert")
@@ -58,7 +97,7 @@ int main()
 		else
 		{
 			if (mainQuery != "exit")
-				cout << "ERROR: Invalid query!" << endl;
+				showErrorMessage();
 		}
 	}
 	// user exited

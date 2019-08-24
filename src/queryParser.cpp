@@ -19,6 +19,9 @@ vector<string> parseQuery(string str)
            parsed.push_back(word);
            word = ""; 
        } 
+       else if(x == '('  || x == ')' || x == ','){
+           continue;
+       }
        else
        { 
            word = word + x; 
