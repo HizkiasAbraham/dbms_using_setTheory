@@ -16,7 +16,7 @@ void createTable(vector<string> dbPath, string tableName, vector<string> columns
 // insert into table
 void insertIntoTable(vector<string> dbPath, string tableName, vector<string> params);
 // select from table
-void selectFrom(string tableName, vector<string> filters);
+void selectFrom(vector<string> dbPath, vector<string> query);
 // delete from table
 void deleteFrom(string tableName, vector<string> filters);
 // update
