@@ -1,10 +1,12 @@
 #include <string>
 #include <vector>
 #include <boost/filesystem.hpp>
+#include <boost/variant.hpp>
 
 using std::vector;
 using std::string;
 using boost::filesystem::path;
+using boost::variant;
 
 string DB_DirPath = "../../dbms_dbs";
 // parse commands supplied by the client
@@ -27,6 +29,8 @@ void showDbsOrTables(string entity, vector<string> currentPath);
 path buildPath(vector<string> pathVector);
 // get column names of a table
 vector<string> getColumnNames(vector<string> dbPath, string tableName);
+// builder function to build a vector of variants from a column file
+vector<variant<int, string>> buildColumn(string colfileValue);
 // show error message
 void showErrorMessage();
 
